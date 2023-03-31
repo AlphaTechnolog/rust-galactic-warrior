@@ -1,4 +1,5 @@
 use std::io::{Write, StdoutLock};
+use crate::game::board::Board;
 
 pub struct Game {
     pub stdout: StdoutLock<'static>,
@@ -23,6 +24,7 @@ impl Game {
 
     pub fn display_screen(&mut self) {
         self.clear_screen();
-        write!(self.stdout, "{}hello", termion::cursor::Goto(1, 1)).unwrap();
+        let mut board = Board::new(70, 10, &mut self.stdout);
+        board.display_board();
     }
 }
